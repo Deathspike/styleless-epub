@@ -18,11 +18,9 @@ export function parseStyle(style: string) {
 }
 
 const blacklist = [
-  'color',
   'font-family',
   'font-size',
   'letter-spacing',
   'line-height',
-  'text-indent',
   'word-spacing'
 ];
