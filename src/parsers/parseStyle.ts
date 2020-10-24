@@ -7,9 +7,7 @@ export function parseStyle(style: string) {
     if (rule.type !== 'rule') continue;
     const declarations: Array<css.Declaration> = rule.declarations || [];
     for (let i = 0; i < declarations.length; i++) {
-      const declaration = declarations[i];
-      if (!declaration.property) continue;
-      if (!blacklist.includes(declaration.property)) continue;
+      if (!isBlacklisted(declarations[i])) continue;
       declarations.splice(i, 1);
       i--;
     }
@@ -17,10 +15,12 @@ export function parseStyle(style: string) {
   return css.stringify(ast);
 }
 
-const blacklist = [
-  'font-family',
-  'font-size',
-  'letter-spacing',
-  'line-height',
-  'word-spacing'
-];
+function isBlacklisted(dec: css.Declaration) {
+  if (dec.property === 'font-family') return true;
+  if (dec.property === 'font-size') return true;
+  if (dec.property === 'letter-spacing') return true;
+  if (dec.property === 'line-height') return true;
+  if (dec.property === 'text-align' && (dec.value === 'justify' || dec.value === 'left')) return true;
+  if (dec.property === 'word-spacing') return true;
+  return false;
+}
