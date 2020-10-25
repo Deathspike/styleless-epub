@@ -1,6 +1,6 @@
 {
   "author": "Roel van Uden",
-  "description": "",
+  "description": "Opens .epub files, locates embedded .css stylesheets, and remove styles that override user settings on a Kobo e-reader.",
   "license": "MIT",
   "main": "dist",
   "name": "styleless-epub",
@@ -11,7 +11,8 @@
     "epub",
     "style",
     "remove",
-    "font"
+    "font",
+    "calibre"
   ],
   "bin": {
     "styleless-epub": "./bin/styleless-epub"
