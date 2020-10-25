@@ -3,6 +3,7 @@ import AdmZip from 'adm-zip';
 import util from 'util';
 
 export async function parseFileAsync(filePath: string) {
+  console.log(`Fetching ${filePath}`);
   const zip = new AdmZip(filePath);
   const zipEntries = zip.getEntries();
   for (const zipEntry of zipEntries) {
@@ -13,4 +14,5 @@ export async function parseFileAsync(filePath: string) {
     zip.addFile(`${zipEntry.entryName}.old`, Buffer.from(originalCss, 'utf8'))
   }
   await util.promisify(zip.writeZip)(undefined);
+  console.log(`Finished ${filePath}`);
 }

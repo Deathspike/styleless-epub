@@ -2,6 +2,7 @@ import AdmZip from 'adm-zip';
 import util from 'util';
 
 export async function restoreFileAsync(filePath: string) {
+  console.log(`Fetching ${filePath}`);
   const zip = new AdmZip(filePath);
   const zipEntries = recordSet(zip.getEntries());
   for (const currentEntry of Object.values(zipEntries)) {
@@ -12,6 +13,7 @@ export async function restoreFileAsync(filePath: string) {
     zip.deleteFile(currentEntry);
   }
   await util.promisify(zip.writeZip)(undefined);
+  console.log(`Finished ${filePath}`);
 }
 
 function recordSet(entries: AdmZip.IZipEntry[]) {

@@ -11,9 +11,7 @@ export async function parseDirAsync(dirPath: string) {
     if (stat.isDirectory()) {
       await parseDirAsync(resourcePath);
     } else if (resourcePath.endsWith('.epub')) {
-      console.log(`Fetching ${resourcePath}`);
       await app.parseFileAsync(resourcePath);
-      console.log(`Finished ${resourcePath}`);
     }
   }
 }
